@@ -1,5 +1,5 @@
 #!/bin/bash
-version=v0.10.0
+version=v0.11.1
 
 GO111MODULE="on" go get sigs.k8s.io/kind@${version}
 
