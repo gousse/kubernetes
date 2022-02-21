@@ -1,0 +1,17 @@
+ingressClass:
+  enabled: true
+  isDefaultClass: false
+
+providers:
+  kubernetesIngress:
+    enabled: true
+    namespaces: []
+    ingressClass: traefik
+
+# Configure ports
+ports:
+  web:
+    nodePort: 32080
+  websecure:
+    nodePort: 32443
+

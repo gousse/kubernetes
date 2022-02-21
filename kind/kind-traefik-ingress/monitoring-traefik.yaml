@@ -1,0 +1,29 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-monitoring
+spec:
+  selector:
+    app.kubernetes.io/name: traefik
+  ports:
+  - port: 9000
+    targetPort: 9000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-monitoring
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Exact
+        path: "/ping"
+        backend:
+          service:
+            name: traefik-monitoring
+            port:
+              number: 9000
