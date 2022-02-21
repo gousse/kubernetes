@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-https-echo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-https-echo
+  template:
+    metadata:
+      labels:
+        app: http-https-echo
+    spec:
+      containers:
+      - name: http-https-echo
+        image: mendhak/http-https-echo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-https-service
+spec:
+  ports:
+  - name: http
+    targetPort: 80
+    port: 80
+  - name: https
+    targetPort: 443
+    port: 443
+  selector:
+    app: http-https-echo
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: http-echo-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /echo
+        pathType: Prefix
+        backend:
+          service:
+            name: http-https-service
+            port:
+              number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: https-echo-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  tls:
+  - hosts:
+    - echo.192.168.56.101.nip.io
+  rules:
+  - http:
+      paths:
+      - path: /echo
+        pathType: Prefix
+        backend:
+          service:
+            name: http-https-service
+            port:
+              number: 80
