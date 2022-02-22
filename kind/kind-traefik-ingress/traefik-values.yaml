@@ -15,3 +15,15 @@ ports:
   websecure:
     nodePort: 32443
 
+tls:
+  certificates:
+    - certFile: /home/u/kind/kind-traefik-ingress/_wildcard.192.168.56.101.nip.io+4.pem
+      keyFile: /home/u/kind/kind-traefik-ingress/_wildcard.192.168.56.101.nip.io+4-key.pem
+      stores:
+        - default
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /home/u/kind/kind-traefik-ingress/_wildcard.192.168.56.101.nip.io+4.pem
+        keyFile: /home/u/kind/kind-traefik-ingress/_wildcard.192.168.56.101.nip.io+4-key.pem
+        
