@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-https-echo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-https-echo
+  template:
+    metadata:
+      labels:
+        app: http-https-echo
+    spec:
+      containers:
+      - name: http-https-echo
+        image: mendhak/http-https-echo
+        env:
+          - name: HTTP_PORT
+            value: "8080"
+          - name: HTTPS_PORT
+            value: "8443"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-https-service
+spec:
+  ports:
+  - name: http
+    targetPort: 8080
+    port: 80
+  - name: https
+    targetPort: 8443
+    port: 443
+  selector:
+    app: http-https-echo
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: https-echo-ingress-through
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - "tls.192.168.56.101.nip.io"
+  rules:
+  - host: tls.192.168.56.101.nip.io
+    http:
+      paths:
+      - path: /tls
+        pathType: Prefix
+        backend:
+          service:
+            name: http-https-service
+            port:
+              number: 443
