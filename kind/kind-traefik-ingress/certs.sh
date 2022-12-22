@@ -5,6 +5,6 @@ mkcert "*.${IP}.nip.io" *.localhost localhost 127.0.0.1 ::1
 
 kubectl -n traefik create secret tls wildcard --cert=./_wildcard.${IP}.nip.io+4.pem --key=./_wildcard.${IP}.nip.io+4-key.pem
 
-kubectl -n default create secret tls keycloak-${IP}.nip.io-tls --cert=./_wildcard.${IP}.nip.io+4.pem --key=./_wildcard.${IP}.nip.io+4-key.pem
+#kubectl -n default create secret tls keycloak-${IP}.nip.io-tls --cert=./_wildcard.${IP}.nip.io+4.pem --key=./_wildcard.${IP}.nip.io+4-key.pem
 
 #kubectl -n traefik apply -f default-cert.yaml
