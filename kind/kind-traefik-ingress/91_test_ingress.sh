@@ -1,6 +1,8 @@
 #!/bin/
 LBFQDN="localhost"
 
+kubectl wait deploy/whoami-deployment --for condition=available --timeout=-1s
+
 echo ${LBFQDN}/foo
 curl -s --noproxy '*' ${LBFQDN}/foo
 
