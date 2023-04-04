@@ -1,4 +1,20 @@
-#!/bin/bash
+#!/bin/
+LBFQDN="localhost"
+
+echo ${LBFQDN}/foo
+curl -s --noproxy '*' ${LBFQDN}/foo
+
+echo ${LBFQDN}/bar
+curl -s --noproxy '*' ${LBFQDN}/bar
+
+echo ${LBFQDN}/whoami
+curl -s --noproxy '*' ${LBFQDN}/whoami
+
+echo https://${LBFQDN}/whoami
+curl -s --noproxy '*' https://${LBFQDN}/whoami
+
+exit
+
 #LBFQDN="demo.192.168.56.101.nip.io"
 LBFQDN="echo.192.168.56.101.nip.io"
 #LBFQDN="localhost"

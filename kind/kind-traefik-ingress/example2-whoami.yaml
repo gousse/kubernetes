@@ -13,9 +13,9 @@ spec:
         app: whoami
     spec:
       containers:
-      - name: whoami-container
-        #image: containous/whoami
-        image: traefik/whoami
+        - name: whoami-container
+          #image: containous/whoami
+          image: traefik/whoami
 ---
 apiVersion: v1
 kind: Service
@@ -23,9 +23,9 @@ metadata:
   name: whoami-service
 spec:
   ports:
-  - name: http
-    targetPort: 80
-    port: 80
+    - name: http
+      targetPort: 80
+      port: 80
   selector:
     app: whoami
 ---
@@ -36,15 +36,15 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - http:
-      paths:
-      - path: /whoami
-        pathType: Exact
-        backend:
-          service:
-            name: whoami-service
-            port:
-              number: 80
+    - http:
+        paths:
+          - path: /whoami
+            pathType: Exact
+            backend:
+              service:
+                name: whoami-service
+                port:
+                  number: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -56,16 +56,15 @@ metadata:
 spec:
   ingressClassName: traefik
   tls:
-  - hosts:
-    - whoami.192.168.56.101.nip.io
+    - hosts:
+        - localhost
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: whoami-service
-            port:
-              number: 80
-
+    - http:
+        paths:
+          - path: /whoami
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami-service
+                port:
+                  number: 80

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#TRAEFIK_HELM_VERSION="10.24.3"
-TRAEFIK_HELM_VERSION="20.8.0"
+#TRAEFIK_HELM_VERSION="21.2.1"
+TRAEFIK_HELM_VERSION="22.0.0"
 
 # create namespace
 kubectl create namespace traefik --dry-run=client -o yaml | kubectl apply -f -
