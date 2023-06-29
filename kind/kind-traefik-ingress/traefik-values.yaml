@@ -14,3 +14,23 @@ ports:
     nodePort: 32080
   websecure:
     nodePort: 32443
+  metrics:
+    port: 9100
+      
+metrics:
+  prometheus:
+    entryPoint: metrics
+
+tracing:
+  jaeger:
+    localAgentHostPort: otelcol.default.svc.cluster.local:6831
+
+ #metrics:
+ #  openTelemetry:
+ #    address: otelcol.default.svc.cluster.local:4318
+ #    insecure: true
+ #
+ #tracing:
+ #  openTelemetry:
+ #    address: otelcol.default.svc.cluster.local:4318
+ #    insecure: true
