@@ -8,6 +8,10 @@ providers:
     namespaces: []
     ingressClass: traefik
 
+service:
+  enabled: true
+  type: NodePort 
+
 # Configure ports
 ports:
   web:
