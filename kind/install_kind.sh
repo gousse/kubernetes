@@ -1,5 +1,5 @@
 #!/bin/bash
-#version=v0.15.0
+version=v0.19.0
 #
 #GO111MODULE="on" go get sigs.k8s.io/kind@${version}
 #
@@ -7,5 +7,5 @@
 #$ go get sigs.k8s.io/kind
 
 
-
-go install sigs.k8s.io/kind@latest
+go install sigs.k8s.io/kind@$version
+#go install sigs.k8s.io/kind@latest
