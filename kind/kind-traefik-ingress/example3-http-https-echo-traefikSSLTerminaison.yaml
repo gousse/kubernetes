@@ -23,11 +23,11 @@ metadata:
 spec:
   ports:
     - name: http
-      targetPort: 80
-      port: 80
+      targetPort: 8080
+      port: 8080
     - name: https
-      targetPort: 443
-      port: 443
+      targetPort: 8443
+      port: 8443
   selector:
     app: http-https-echo
 ---
@@ -46,7 +46,7 @@ spec:
               service:
                 name: http-https-service
                 port:
-                  number: 80
+                  number: 8080
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -69,4 +69,4 @@ spec:
               service:
                 name: http-https-service
                 port:
-                  number: 80
+                  number: 8080

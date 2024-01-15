@@ -1,3 +1,6 @@
+image:
+  tag: "v3.0.0-beta3"
+
 ingressClass:
   enabled: true
   isDefaultClass: false
@@ -27,7 +30,7 @@ metrics:
 
 tracing:
   jaeger:
-    localAgentHostPort: otelcol.default.svc.cluster.local:6831
+    localAgentHostPort: otel-demo-otelcol.default.svc.cluster.local:6831
 
  #metrics:
  #  openTelemetry:
