@@ -34,10 +34,10 @@ ports:
 
 metrics:
   openTelemetry:
-    address: otelcol.default.svc.cluster.local:4318
+    address: my-opentelemetry-collector.default.svc.cluster.local:4318
     insecure: true
 
 tracing:
   openTelemetry:
-    address: otelcol.default.svc.cluster.local:4318
+    address: my-opentelemetry-collector.default.svc.cluster.local:4318
     insecure: true
