@@ -24,24 +24,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: http-https-service-3
-spec:
-  ports:
-    - name: http
-      targetPort: 8080
-      port: 8080
-    - name: https
-      targetPort: 8443
-      port: 8443
-  selector:
-    app: http-https-echo-3
----
-apiVersion: v1
-kind: Service
-metadata:
   name: https-service-3
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
+  # annotations:
+  #   traefik.ingress.kubernetes.io/service.serversscheme: https
 spec:
   ports:
     - name: https
@@ -70,5 +55,43 @@ spec:
             backend:
               service:
                 name: https-service-3
+                port:
+                  name: https
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-https-service-3
+spec:
+  ports:
+    - name: http
+      targetPort: 8080
+      port: 8080
+    - name: https
+      targetPort: 8443
+      port: 8443
+  selector:
+    app: http-https-echo-3
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: https-https-echo-ingress3
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - localhost
+  rules:
+    - http:
+        paths:
+          - path: /echo4
+            pathType: Prefix
+            backend:
+              service:
+                name: http-https-service-3
                 port:
                   name: https
