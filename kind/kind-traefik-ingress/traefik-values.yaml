@@ -23,21 +23,28 @@ ports:
     nodePort: 32443
   metrics:
     port: 9100
-      
-#metrics:
-#  prometheus:
-#    entryPoint: metrics
-#
-#tracing:
-#  jaeger:
-#    localAgentHostPort: otel-demo-otelcol.default.svc.cluster.local:6831
 
-metrics:
-  openTelemetry:
-    address: my-opentelemetry-collector.default.svc.cluster.local:4318
-    insecure: true
+#additional traefik static config. CLI 
+#https://docs.traefik.io/reference/static-configuration/cli/
+# allow local selfsign certs for dev
+additionalArguments:
+  - "--serversTransport.insecureSkipVerify=true"
+  
+  
+# #metrics:
+# #  prometheus:
+# #    entryPoint: metrics
+# #
+# #tracing:
+# #  jaeger:
+# #    localAgentHostPort: otel-demo-otelcol.default.svc.cluster.local:6831
 
-tracing:
-  openTelemetry:
-    address: my-opentelemetry-collector.default.svc.cluster.local:4318
-    insecure: true
+# metrics:
+#   openTelemetry:
+#     address: my-opentelemetry-collector.default.svc.cluster.local:4318
+#     insecure: true
+
+# tracing:
+#   openTelemetry:
+#     address: my-opentelemetry-collector.default.svc.cluster.local:4318
+#     insecure: true
