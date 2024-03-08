@@ -28,6 +28,10 @@ echo https://${LBFQDN}/echo2
 curl -s --noproxy '*' https://${LBFQDN}/echo2
 echo "**********************"
 
+echo https://${LBFQDN}/echo3
+curl -s --noproxy '*' https://${LBFQDN}/echo3
+echo "**********************"
+
 exit
 
 #LBFQDN="demo.192.168.56.101.nip.io"
@@ -43,3 +47,5 @@ curl -sv --noproxy '*' https://${LBFQDN}/echo
 curl -sv --noproxy '*' ${LBFQDN}/echo2
 curl -sv --noproxy '*' -k https://${LBFQDN}/echo2
 curl -sv --noproxy '*' https://${LBFQDN}/echo2
+curl -sv --noproxy '*' -k https://${LBFQDN}/echo3
+curl -sv --noproxy '*' https://${LBFQDN}/echo3
