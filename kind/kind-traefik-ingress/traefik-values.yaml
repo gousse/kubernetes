@@ -1,5 +1,5 @@
 image:
-  tag: "v3.0.0-rc1"
+  tag: "v3.0.0-rc3"
 
 ingressClass:
   enabled: true
