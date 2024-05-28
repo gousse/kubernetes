@@ -15,7 +15,6 @@ helm upgrade --install -n traefik traefik traefik/traefik -f traefik-values.yaml
 sleep 5
 
 # wait for traefik CRD
-#kubectl -n traefik wait --for condition=established --timeout=-1s crd tlsstores.traefik.containo.us
 kubectl -n traefik wait --for condition=established --timeout=-1s crd tlsstores.traefik.io
 
 # add a traefic monitoring service
@@ -23,6 +22,7 @@ kubectl apply -n traefik -f monitoring-traefik.yaml
 
 # add default cert store
 kubectl apply -n traefik -f default-cert.yaml
+kubectl apply -n traefik -f tlsoptions.yaml
 
 echo "Waiting for pods to be ready"
 kubectl wait --namespace traefik deploy/traefik --for condition=available --timeout=-1s
